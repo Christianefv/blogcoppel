@@ -19,7 +19,7 @@
                 <span> Autor: {{publicacion.autor}}</span>
             </div> 
         </div>
-        <div v-else class="col cursor-pointer text-left bg-dark text-white m-1">
+        <div v-else class="col cursor-pointer text-left bg-amarillo text-white m-1">
             <div class="row">
                 <div class=" col-md-12 mt-2">{{publicacion.titulo}}</div>
                 <div class="col-11 d-flex">
@@ -75,6 +75,11 @@ export default {
 }
 </script>
 <style scoped>
+.bg-amarillo{
+    background-color:#EFB758 !important;
+    font-weight: bold;
+}
+
 .card-categoria {
     width: 318px;
     height: 317px;

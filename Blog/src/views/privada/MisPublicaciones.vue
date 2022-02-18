@@ -37,7 +37,7 @@
                 </tbody>
             </table>
         </div>
-        <div v-else class="bg-info col text-center text-white ml-2 mr-2" style="height:30px !important;">
+        <div v-else class="bg-amarillo col text-center text-white ml-2 mr-2" style="height:30px !important;">
             <span> No hay publicaciones que mostrar</span>
         </div>
     </div>
@@ -103,6 +103,11 @@ export default {
 }
 </script>
 <style scoped>
+.bg-amarillo{
+    background-color:#EFB758 !important;
+    font-weight: bold;
+}
+
 .truncate-text {
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -1,14 +1,13 @@
 <template>
 	<div class="container-fluid">
-		<div class="row" id="row-contenido">			
-			<div class="col-2 d-none d-lg-flex side-bar bg-white pl-0">
-				<div class="blue-bar"></div>
+		<div class="row" id="row-contenido">
+			<div class="col-2 d-none d-lg-flex side-bar bg-azul" style="min-height: 100vh">
 				<ul class="nav flex-column flex-nowrap overflow-hidden blue-bar-over">
-					<li class="nav-item text-left my-3">
+					<li class="nav-item text-left my-3" style="">
 						<router-link class="text-truncate text-decoration-none" @click.native="togleMenu(0)" to="/usuarios/">
-						<div v-if="usuarioGlobal().avatar != ''" class="avatar">
+						<!-- <div v-if="usuarioGlobal().avatar != ''" class="avatar">
 							<img class="img-fluid" :src="'data:image/jpeg;base64,' + usuarioGlobal().avatar" alt="image responsive">
-						</div>
+						</div> -->
 						<span class="d-none d-sm-inline welcome-text">{{usuarioGlobal().usuario}}</span>
 							<!-- <span class="d-none d-sm-inline welcome-text">Bienvenido</span> -->
 						</router-link>
@@ -66,7 +65,7 @@
 							<span class="nav-link-text d-none d-sm-inline">Todas las publicaciones</span>
 						</router-link>
 					</li>
-					<li class="nav-item text-left">
+					<!-- <li class="nav-item text-left">
 						<router-link
 							:class="{ active: current == 5 }"
 							@click.native="logOut"
@@ -77,13 +76,26 @@
 								class="fas fa-arrow-left"></i>
 							<span class="nav-link-text d-none d-sm-inline">Cerrar sesión</span>
 						</router-link>
-					</li>
+					</li> -->
 				</ul>		
 			</div>
 			<!-- fin sección side-bar -->
 
 			<!-- Inicia sección contenido -->
-			<div class="col pt-2 bg-gray text-left">
+			<div class="col text-left">
+				<b-navbar class="row d-none d-lg-flex bg-azul">
+					<b-navbar-brand class="d-flex align-items-center">
+						<div v-if="usuarioGlobal().avatar != ''" class="avatar">
+							<img class="img-fluid" :src="'data:image/jpeg;base64,' + usuarioGlobal().avatar" alt="image responsive">
+						</div>
+					</b-navbar-brand>					
+					<b-navbar-nav class="ml-auto font-weight-bold text-warning">
+						<b-nav-item ><span class="text-warning" style="color:#EFB758 !important;"> {{usuarioGlobal().nombre}}</span></b-nav-item>
+						<button @click="logOut" class="px-4 btn btn-outline-warning">
+							<i class="fa fa-sign-out-alt mr-1"></i> Salir
+						</button>
+					</b-navbar-nav>
+				</b-navbar>
 				<slot name="contenido"></slot>
 			</div>
 			<!-- Fin sección contenido -->
@@ -119,7 +131,10 @@
 				}
 			},
 			logOut() {
-				window.localStorage.removeItem("tokenWebUsuarios")
+				window.localStorage.removeItem('refreshToken')
+				window.localStorage.removeItem('tokenWebUsuarios')
+				window.localStorage.removeItem('user')
+				window.localStorage.removeItem('expiresAt')
 
 				this.$router.push({ path: "/" })
 					.catch(err => err)
@@ -132,6 +147,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.bg-azul{
+    background-color:#17395C !important;
+    font-weight: bold;
+}
 	.avatar {
 		position: absolute;
 	}
@@ -145,23 +164,19 @@
 	.side-bar {
 		min-width: 250px !important;
 	}
-	.bg-gray {
-		background-color: white;
-	}
 
 	.nav-link {
 		padding: 0.4rem 0.5rem;
 		margin-top: 0.1rem;
-		color: black;
+		color: #EFB758;
 		font-size: 16px;
 		font-weight: bold;
 	}
 
 	.nav-item .active {
-		background: #17a2b8;
+		background: #EFB758;
 		color: white !important;
-	}
-
+	}	
 	.nav-link-text {
 		margin-left: 1.5rem;
 		font-size: 18px;
@@ -182,13 +197,13 @@
 
 	.welcome-text {
 		margin-left: 4rem;
-		color: #0a2157;
+		color: #EFB758;
 		font-weight: bold;
 		font-size: 20px;
 	}
 
 	.blue-bar-icon {
-		color: #0a2157;
+		color: #EFB758;
 		font-size: 23px;
 	}
 </style>

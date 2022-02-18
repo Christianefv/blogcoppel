@@ -12,10 +12,16 @@
 <style>
 #nav {
   padding: 10px;
-  background-color:#17a2b8 !important;
+  background-color:#17395C !important;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #EFB758;
 }
 
 #nav a.router-link-exact-active {
+  font-weight: bold;
   color: white !important;
 }
 </style>

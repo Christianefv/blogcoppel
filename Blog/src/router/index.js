@@ -59,6 +59,9 @@ const isAutenticated = () => {
 
 		if(date < Date.now()){
 			window.localStorage.removeItem('refreshToken')
+      window.localStorage.removeItem('tokenWebUsuarios')
+      window.localStorage.removeItem('user')
+      window.localStorage.removeItem('expiresAt')
 
 			this.$msg.fire({
 			text: 'La sesión ha caducado, por favor vuelva a autenticarse para continuar',

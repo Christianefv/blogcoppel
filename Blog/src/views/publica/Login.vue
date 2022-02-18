@@ -16,7 +16,7 @@
                             <input  type="text" 
                                     id="txtUsuario" 
                                     name="txtUsuario" 
-                                    class="form-control bg-smoked text-white" 
+                                    class="form-control" 
                                     placeholder="Usuario" required 
                                      v-model="credenciales.usuario">
                         </div>
@@ -26,7 +26,7 @@
                             <input  type="password" 
                                     id="txtPassword" 
                                     name="txtPassword" 
-                                    class="form-control bg-smoked text-white" 
+                                    class="form-control" 
                                     placeholder="Contraseña" required 
                                     v-model="credenciales.password">
                         </div>
@@ -73,13 +73,18 @@ export default {
         async login(){
             var r = await servicio.login(this.credenciales)
             if (r.value) {
+                console.log('token', r)
                 this.tokenWebUsuarios.token = r.token.token
                 this.tokenWebUsuarios.expiresAt = r.token.expiresAt
                 this.tokenWebUsuarios.refreshToken = r.token.refreshToken
                 this.tokenWebUsuarios.user = JSON.stringify(r.data)
                 var decode = decodeURIComponent(encodeURI(this.tokenWebUsuarios.user))
                 this.tokenWebUsuarios.user = decode
-                window.localStorage.tokenWebUsuarios = JSON.stringify(this.tokenWebUsuarios)              
+                window.localStorage.tokenWebUsuarios = JSON.stringify(this.tokenWebUsuarios)
+                window.localStorage.user = r.data.usuario
+                window.localStorage.expiresAt = r.token.expiresAt
+                window.localStorage.refreshToken = r.token.refreshToken
+                
                 this.$router.push({ path: "/usuarios" })
                     .catch(err => err)
             } else {
@@ -103,14 +108,14 @@ export default {
 }
 
 .bg-smoked {
-    background-color: #17a2b8 !important;
+    background-color: #17395C !important;
     border: 1px solid rgba(245, 245, 245, .6) !important;
 }
 
 .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #80bdff;
+    border-color: #17395C;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1) inset;
     -moz-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1) inset;

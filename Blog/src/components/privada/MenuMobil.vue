@@ -42,8 +42,10 @@
 				<li @click="logOut" 
 					class="list-group-item" 
 					id="cerrar-sesion" 
-					title="Cerrar sesión">
-						<i class="fas fa-arrow-left"></i>
+					title="Salir">
+						<button @click="logOut" class="px-4 btn" style="background:none; border;none">
+							<i class="fa fa-sign-out-alt mr-1"></i>
+						</button>
 				</li>
 			</ul>
 		</div>
@@ -76,7 +78,10 @@
 		},
 		methods: {
 			logOut() {
-				window.localStorage.removeItem("tokenWebUsuarios")
+				window.localStorage.removeItem('refreshToken')
+				window.localStorage.removeItem('tokenWebUsuarios')
+				window.localStorage.removeItem('user')
+				window.localStorage.removeItem('expiresAt')
 
 				this.$router.push({ path: "/" })
 				.catch(err => err)
@@ -120,9 +125,9 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 	.menu-mobile-container{
-		position: relative;
+		position: relatave;
 	}
 
 	
@@ -136,7 +141,7 @@
 		text-align: center;
 	}
 	.nav-movil{
-		background-color: #17a2b8 !important;
+		background-color: #0a2157 !important;
 		min-height: 85px;
 		padding-top: 0.6rem;		
 		overflow-y: hidden !important;
@@ -145,7 +150,7 @@
 	.nav-movil ul li i {
 		font-size: 31px;
 		color: white;
-		background-color: #17a2b8;
+		background-color: #0a2157;
 		padding: 10px;
 	}
 
@@ -153,7 +158,7 @@
 		border: none;
 		height: 62px;
 		width: 62px;
-		background-color: #17a2b8;
+		background-color: #0a2157;
 		padding: 0.45rem 0.55rem;
 		/*margin-right: 1.3rem;*/
 	}
