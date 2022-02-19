@@ -15,7 +15,7 @@ namespace Blog.Api.Modules
 
         private object GetRoot()
         {
-            string Mesanje = "la Api se encuentra funcionando 2022/02/17";
+            string Mesanje = "la Api se encuentra funcionando 2022/02/18";
 
             return Response.AsJson(Mesanje);
         }

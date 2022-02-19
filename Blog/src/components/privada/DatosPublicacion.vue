@@ -1,5 +1,5 @@
 <template>
-    <div class="row m-4">
+    <div class="row col m-4">
         <div class="col-12">
             <div class="form-group row">
                 <label  class="col-3 col-form-label text-sm-right pr-0">

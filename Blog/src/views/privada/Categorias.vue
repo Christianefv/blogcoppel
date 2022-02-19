@@ -54,15 +54,16 @@
                         {{categoria.titulo}}
                     </div>
                     <div class="font-weight-bolder ml-2">
-                        <textarea v-model="categoria.descripcion" class="form-control" disabled></textarea></div>
+                        <textarea v-model="categoria.descripcion"  style="height:300px" class="form-control" disabled></textarea></div>
                 </div>
             </div>
             <b-button class="mt-3" block @click="$bvModal.hide('modal-vista-previa-categorias')">Cerrar</b-button>
         </b-modal> 
         <div class="pt-3 form-group row">
-            <button class=" btn btn-info mr-1"
-                    @click="vistaPrevia">Vista previa</button>
+            
             <div class="col-11 d-flex justify-content-end">
+                <button class=" btn btn-info mr-1"
+                    @click="vistaPrevia">Vista previa</button>
                 <button class=" btn btn-primary"
                     @click="guardarCategoria"
                     >Guardar</button>
@@ -102,14 +103,20 @@ export default({
                 formData.append('titulo', this.categoria.titulo)
                 formData.append('descripcion', this.categoria.descripcion)
                 formData.append('file', this.file);
+                this.$loading(true)
                 let r = await servicio.guardarCategorias(formData)
-                console.log(r)
+                if (r.value) {
+                    this.$msg.success(r.message);
+                }
+                this.$loading(false)
+                
             } catch (error) {
+                this.$loading(false)
                 console.log('guardarCategoria', error)
             }
             
         },
-        istaPrevia(){
+        vistaPrevia(){
             this.$bvModal.show('modal-vista-previa-categorias')
         }
     }
@@ -122,5 +129,10 @@ export default({
     color: blue !important;
     font-weight: bold;
     background-color: white;
+}
+
+.card-categoria {
+    width: 318px;
+    height: 317px;
 }
 </style>

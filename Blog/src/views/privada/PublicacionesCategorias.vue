@@ -34,15 +34,26 @@
         <div v-if="modoTarjeta=='true'">
             <card-comentarios
             :comentarios="comentarios"
-            @comentar="comentar"></card-comentarios>
+            @comentar="comentar"
+            @verUsuario="verUsuario"></card-comentarios>
         </div>
+        <b-modal id="modal-usuario" size="xl" title="Detalles del usuario" hide-footer>
+            <card-usuario
+                :usuario="usuarioDetalle">
+            </card-usuario>
+            
+            <b-button class="mt-3" block @click="$bvModal.hide('modal-usuario')">Cerrar</b-button>
+        </b-modal> 
     </div>
 </template>
 <script>
 import servicio from "@/services/servicio-publicacion"
 import servicioInicio from "@/services/servicio-inicio"
+import servicioUsuarios from "@/services/servicio-usuario"
 import CardPublicacion from "@/components/CardPublicacion"
 import CardComentarios from "@/components/CardComentarios"
+import CardUsuario from "@/components/privada/CardUsuario"
+
 export default({
     data() {
         return {
@@ -57,12 +68,14 @@ export default({
                 idCatUsuarios:0,
                 idCatPublicaciones:0,
                 comentarios:''
-            }
+            },
+            usuarioDetalle:{}
         }
     },
     components: {
 		CardPublicacion,
-        CardComentarios
+        CardComentarios,
+        CardUsuario
 	},
     computed:{
     },
@@ -139,6 +152,19 @@ export default({
 					console.log(e)
 					this.$loading(false)
 				})
+        },
+        verUsuario(idCatUsuarios){
+            this.usuarioDetalle = {}
+            servicioUsuarios.consultarDatosUsuario(idCatUsuarios)
+                .then(r => {
+                    if(r.value){
+                        this.usuarioDetalle =  r.data[0]
+                        this.$bvModal.show('modal-usuario')
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }
 })

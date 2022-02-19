@@ -1,5 +1,6 @@
 ﻿using Blog.Api.DA;
 using Nancy;
+using Nancy.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Blog.Api.Modules
         private readonly DACategoria _DA = null;
         public InicioModule() : base("/inicio")
         {
+            this.RequiresAuthentication();
             _DA = new DACategoria();
             Get("/categorias/v1/{idCatCategorias}", p => GetCategorias(p));
         }

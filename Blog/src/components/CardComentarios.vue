@@ -4,10 +4,11 @@
             Comentarios
         </div>
         <div :class="comments_wrapper_classes">
-            <card-comentario
+            <card-comentario                
                 v-for="(comentario, index) in toBeShown"
                 :comentario="comentario"
                 :key="index"
+                @verUsuario="verUsuario"
             ></card-comentario>
         </div>
          <div class="d-flex justify-content-end">
@@ -25,14 +26,13 @@
                 type="text" 
                 v-model.trim="reply" 
                 class="reply--text" 
-                placeholder="comentario..."
-                maxlength="250"
+                placeholder="Comentario..."
                 required
                 @keyup.enter="comentar"/>
             <button class="reply--button" 
                     @click.prevent="comentar">
                     <i class="fa fa-paper-plane"></i> 
-                    Send
+                    Enviar
             </button>
         </div>
     </div>
@@ -73,6 +73,9 @@ import CardComentario from "@/components/CardComentario"
                     this.$emit('comentar', this.reply);
                     this.reply = '';
                 }
+            },
+            verUsuario(idCatUsuarios){
+                this.$emit("verUsuario", idCatUsuarios)
             }
         },
         
@@ -94,37 +97,12 @@ import CardComentario from "@/components/CardComentario"
     overflow-y: auto;
     padding-right: 10px;
 }
-
-.custom-scrollbar::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    -moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    background-color: #fff;
-}
-
-.custom-scrollbar::-webkit-scrollbar
-{
-    width: 8px;
-    background-color: #fff;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb
-{
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    -moz-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-}
-
 /* Reply component */
 .reply {
     display: flex;
     position: relative;
     align-items: center;
-    background-color: #e2eef0;
+    background-color: #eec57f;
     border-radius: 30px;
     padding: 5px 10px;
     overflow: hidden;
@@ -163,9 +141,9 @@ import CardComentario from "@/components/CardComentario"
 .reply .reply--button {
     position: absolute;
     right: -100px;
-    border: 1px solid #2a629c;
+    border: 1px solid #17395C;
     background-color: transparent;
-    color: #2a629c;
+    color: #17395C;
     display: inline-block;
     font-weight: 400;
     text-align: center;

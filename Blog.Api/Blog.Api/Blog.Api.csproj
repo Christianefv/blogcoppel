@@ -100,6 +100,7 @@
     <Compile Include="Modules\InicioModule.cs" />
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\TokenManager.cs" />
+    <Compile Include="Modules\UsuarioModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

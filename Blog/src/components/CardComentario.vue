@@ -1,11 +1,11 @@
 <template>
-    <div class="comment bg-info">
+    <div class="comment">
         <div class="avatar" v-if="comentario.avatar!=''">
             <img    :src="'data:image/jpeg;base64,' + comentario.avatar" 
                     alt="Responsive image">
         </div>
         <div class="text">
-            <a class="username" href="#">@{{ comentario.usuario }}</a> <span>{{ comentario.comentarios }}</span>
+            <a class="username" @click="verUsuario">@{{ comentario.usuario }}</a> <span>{{ comentario.comentarios }}</span>
         </div>
     </div>
 </template>
@@ -13,7 +13,12 @@
 <script>
     export default {
         name: 'comentario',
-        props: ['comentario']
+        props: ['comentario'],
+        methods: {
+            verUsuario(){
+                this.$emit("verUsuario", this.comentario.idCatUsuarios)
+            }
+        }
     }
 </script>
 
@@ -25,7 +30,7 @@
     margin-bottom: 10px;
     align-items: center;
     /* color: #333; */
-    background-color: #e2eef0;
+    background-color: #EFB758;
     border-radius: 30px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
