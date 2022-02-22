@@ -15,7 +15,6 @@ namespace Blog.Api.Modules
         private readonly DACategoria _DA = null;
         public CategoriaModule() : base("/categorias")
         {
-            this.RequiresAuthentication();
             _DA = new DACategoria();
             Get("/v1/{idCatCategorias}", p => GetCategorias(p));
             Post("/v1/", p => PostCategorias(p));
@@ -52,11 +51,9 @@ namespace Blog.Api.Modules
                         imagen = ms.ToArray();
                     }
                 }
-                if (imagen != null)
-                {
-                    categoria.Imagen = imagen == null ? "" : Convert.ToBase64String(imagen, 0, imagen.Length);
-                }
-
+                
+                categoria.Imagen = imagen == null ? "" : Convert.ToBase64String(imagen, 0, imagen.Length);
+                
 
                 var r = _DA.PostCategoria(categoria);
 

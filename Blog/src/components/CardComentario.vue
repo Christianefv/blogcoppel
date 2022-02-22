@@ -1,11 +1,18 @@
 <template>
-    <div class="comment">
-        <div class="avatar" v-if="comentario.avatar!=''">
-            <img    :src="'data:image/jpeg;base64,' + comentario.avatar" 
-                    alt="Responsive image">
+    <div class="comment row">
+        <div class="col-11 d-flex">
+            <div class="avatar" v-if="comentario.avatar!=''">
+                <img    :src="'data:image/jpeg;base64,' + comentario.avatar" 
+                        alt="Responsive image">
+            </div>
+            <div class="text">
+                <a class="username" @click="verUsuario">@{{ comentario.usuario }}</a> <span>{{ comentario.comentarios }}</span>
+            </div>
         </div>
-        <div class="text">
-            <a class="username" @click="verUsuario">@{{ comentario.usuario }}</a> <span>{{ comentario.comentarios }}</span>
+        <div class="col-1" v-if="comentario.idCatUsuarios == usuarioGlobal().idCatUsuario">
+            <button class="btn text-danger" @click="eliminarComentario(comentario.idComentarios)">
+                <i class="fas fa-trash"></i>
+            </button>
         </div>
     </div>
 </template>
@@ -17,6 +24,9 @@
         methods: {
             verUsuario(){
                 this.$emit("verUsuario", this.comentario.idCatUsuarios)
+            },
+            eliminarComentario(idComentarios){
+                this.$emit("eliminarComentario", idComentarios)
             }
         }
     }
@@ -24,8 +34,7 @@
 
 <style scoped>
 /* Single-comment component */
-.comment {
-    display: flex;
+.comment {    
     padding: 10px;
     margin-bottom: 10px;
     align-items: center;

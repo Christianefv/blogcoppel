@@ -8,12 +8,12 @@ using System.Web;
 
 namespace Blog.Api.Modules
 {
-    public class InicioModule : NancyModule
+    public class PublicModule : NancyModule
     {
         private readonly DACategoria _DA = null;
-        public InicioModule() : base("/inicio")
+        public PublicModule() : base("/publico")
         {
-            this.RequiresAuthentication();
+            
             _DA = new DACategoria();
             Get("/categorias/v1/{idCatCategorias}", p => GetCategorias(p));
         }

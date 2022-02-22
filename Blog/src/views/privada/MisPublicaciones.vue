@@ -53,7 +53,7 @@ export default {
     computed:{
 
     },
-    mounted() {		    
+    async mounted() {
         this.consultarPublicaciones()
     },
     methods: {
@@ -72,20 +72,23 @@ export default {
 					this.$loading(false)
 				})
 		},
-        eliminarPublicacion(item){
-            this.$loading(true)
-			servicio.eliminarrPublicaciones(item.idCatPublicaciones)
+        async eliminarPublicacion(item){
+            let r = await this.$msg.question('¿Desea eliminar la publicación?') 
+            if(r.value){
+                this.$loading(true)
+                servicio.eliminarrPublicaciones(item.idCatPublicaciones)
 				.then(r => {
 					//console.log(r.data)
 					if(r.value){
 						this.$loading(false)
-						this.publicaciones = r.data
+						this.consultarPublicaciones()
 					}
 				})
 				.catch(e => {
 					console.log(e)
 					this.$loading(false)
 				})
+            }
         },
         editar(item){
             console.log(item)

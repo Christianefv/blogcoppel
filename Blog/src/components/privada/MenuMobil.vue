@@ -141,7 +141,7 @@
 		text-align: center;
 	}
 	.nav-movil{
-		background-color: #0a2157 !important;
+		background-color: #17395C !important;
 		min-height: 85px;
 		padding-top: 0.6rem;		
 		overflow-y: hidden !important;
@@ -150,7 +150,7 @@
 	.nav-movil ul li i {
 		font-size: 31px;
 		color: white;
-		background-color: #0a2157;
+		background-color: #17395C;
 		padding: 10px;
 	}
 
@@ -158,7 +158,7 @@
 		border: none;
 		height: 62px;
 		width: 62px;
-		background-color: #0a2157;
+		background-color: #17395C;
 		padding: 0.45rem 0.55rem;
 		/*margin-right: 1.3rem;*/
 	}
@@ -178,7 +178,7 @@
 
 	@media (max-width: 360px) {
 		.nav-movil {
-			background-color: #17a2b8 !important;
+			background-color: #17395C !important;
 			min-height: 64px;
 			padding: 0px;
 		}

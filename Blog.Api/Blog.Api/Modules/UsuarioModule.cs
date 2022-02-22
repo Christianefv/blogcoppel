@@ -17,7 +17,6 @@ namespace Blog.Api.Modules
         private readonly DAUsuario _DA = null;
         public UsuarioModule() : base("/usuarios")
         {
-            this.RequiresAuthentication();
             _DA = new DAUsuario();
             Post("/v1", p => AltaUsuario(p));
             Get("/v1/{idCatUsuario}", p => ConsultarUsuario(p));

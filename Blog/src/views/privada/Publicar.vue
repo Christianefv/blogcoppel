@@ -11,7 +11,7 @@
 </template>
 <script>
 import PmDatosPublicacion from "@/components/privada/DatosPublicacion"
-import servicioInicio from "@/services/servicio-inicio"
+import servicioInicio from "@/services/servicio-publico"
 import servicio from "@/services/servicio-publicacion"
 export default {
     data() {
@@ -58,6 +58,8 @@ export default {
                 let r = await servicio.guardarPublicacion(formData)
                 if(r.value){
                     this.$msg.success(r.message);
+                    this.$router.push({ path: "/usuarios" })
+                    .catch(err => err)
                 }
                 else{
                     this.$msg.info(r.message);

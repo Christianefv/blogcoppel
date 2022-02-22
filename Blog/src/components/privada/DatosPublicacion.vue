@@ -28,7 +28,7 @@
                                 id="txtpublicacion" 
                                 ref="txtNombre" 
                                 tabindex="1" 
-                                placeholder="Cristiano ronaldo">
+                                placeholder="Título de la publicación">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -38,7 +38,7 @@
                         <textarea   v-model="publicacion.descripcion" 
                                     class="form-control form-control-sm" 
                                     style="height:300px"
-                                    placeholder="Descripción del contenido de la categoría"></textarea>
+                                    placeholder="Descripción del contenido de la publicación"></textarea>
                       </div>
                 </div>
                 <div class="form-group row">

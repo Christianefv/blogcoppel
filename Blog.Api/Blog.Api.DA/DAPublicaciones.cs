@@ -136,5 +136,23 @@ namespace Blog.Api.DA
                 return new Result(ex);
             }
         }
+
+        public Result EliminarComentario(int idComentario)
+        {
+            try
+            {
+                ConexionParameters parametros = new ConexionParameters();
+                parametros.Add("@pIdComentario", ConexionDbType.Int, idComentario);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+
+                var r = _conexion.Execute("ProcComentariosBorrar", parametros);
+                return r;
+            }
+            catch (Exception ex)
+            {
+                return new Result(ex);
+            }
+        }
     }
 }

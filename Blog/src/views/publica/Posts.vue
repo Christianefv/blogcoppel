@@ -22,7 +22,7 @@
 </template>
 <script>
 import PmHeader from "@/components/publica/Header"
-import servicio from "@/services/servicio-publicacion"
+import servicio from "@/services/servicio-publico"
 import CardPublicacion from "@/components/CardPublicacion"
 export default({
     data() {

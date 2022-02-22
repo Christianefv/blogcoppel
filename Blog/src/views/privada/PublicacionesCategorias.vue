@@ -35,20 +35,20 @@
             <card-comentarios
             :comentarios="comentarios"
             @comentar="comentar"
+            @eliminarComentario="eliminarComentario"
             @verUsuario="verUsuario"></card-comentarios>
         </div>
         <b-modal id="modal-usuario" size="xl" title="Detalles del usuario" hide-footer>
             <card-usuario
                 :usuario="usuarioDetalle">
             </card-usuario>
-            
             <b-button class="mt-3" block @click="$bvModal.hide('modal-usuario')">Cerrar</b-button>
         </b-modal> 
     </div>
 </template>
 <script>
 import servicio from "@/services/servicio-publicacion"
-import servicioInicio from "@/services/servicio-inicio"
+import servicioInicio from "@/services/servicio-publico"
 import servicioUsuarios from "@/services/servicio-usuario"
 import CardPublicacion from "@/components/CardPublicacion"
 import CardComentarios from "@/components/CardComentarios"
@@ -122,6 +122,7 @@ export default({
         },
         consultarComentarios(idCatPublicaciones){
             this.$loading(true)
+            this.comentarios = []
 			servicio.consultarComentarios( idCatPublicaciones)
 				.then(r => {
 					if(r.value){
@@ -163,6 +164,20 @@ export default({
                     }
                 })
                 .catch(err => {
+                    console.log(err)
+                })
+        },
+        eliminarComentario(idComentarios){
+            this.$loading(true)
+            servicio.eliminarComentarios(idComentarios)
+                .then(r => {
+                    this.$loading(false)
+                    if(r.value){
+                        this.consultarComentarios(this.comentario.idCatPublicaciones)
+                    }
+                })
+                .catch(err => {
+                    this.$loading(false)
                     console.log(err)
                 })
         }

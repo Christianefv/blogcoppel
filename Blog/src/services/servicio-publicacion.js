@@ -73,4 +73,16 @@ servicio.guardarComentarios = function(comentario) {
         return e;
     })
 }
+
+servicio.eliminarComentarios = function(comentario) {
+    
+    return base.delete('/usuarios/publicaciones/comentarios/v1/' + comentario)
+    .then(r => {
+        return r.data;
+    })
+    .catch(e => {
+        return e;
+    })
+}
+
 export default servicio;

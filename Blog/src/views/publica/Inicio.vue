@@ -21,7 +21,7 @@
 </template>
 <script>
 import PmHeader from "@/components/publica/Header"
-import servicio from "@/services/servicio-inicio"
+import servicio from "@/services/servicio-publico"
 import PmCardCategoria from "@/components/CardCategoria"
 export default {
 	data() {

@@ -97,7 +97,7 @@
     <Compile Include="Modules\AuthenticationModule.cs" />
     <Compile Include="Modules\CategoriaModule.cs" />
     <Compile Include="Modules\PublicacionesModule.cs" />
-    <Compile Include="Modules\InicioModule.cs" />
+    <Compile Include="Modules\PublicModule.cs" />
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\TokenManager.cs" />
     <Compile Include="Modules\UsuarioModule.cs" />

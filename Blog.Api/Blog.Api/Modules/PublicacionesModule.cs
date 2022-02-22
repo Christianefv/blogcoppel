@@ -22,8 +22,24 @@ namespace Blog.Api.Modules
             Delete("/v1/{idCatPublicaciones}", p => DeletePublicaciones(p));
             Get("/comentarios/v1/{idCatPublicaciones}", p => ComentariosPublicacion(p));
             Post("/comentarios/v1", p => GuardarComentario(p));
+            Delete("/comentarios/v1/{idComentarios}", p => EliminarComentario(p));
         }
 
+        private dynamic EliminarComentario(dynamic arg)
+        {
+            try
+            {
+                int idComentarios = arg.idComentarios;
+                var r = _DA.EliminarComentario(idComentarios);
+
+                return Response.AsJson(r);
+            }
+            catch (Exception ex)
+            {
+
+                return Response.AsJson(ex, HttpStatusCode.InternalServerError);
+            }
+        }
 
         private dynamic GuardarComentario(dynamic arg)
         {

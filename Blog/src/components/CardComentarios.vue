@@ -9,6 +9,7 @@
                 :comentario="comentario"
                 :key="index"
                 @verUsuario="verUsuario"
+                @eliminarComentario="eliminarComentario"
             ></card-comentario>
         </div>
          <div class="d-flex justify-content-end">
@@ -76,6 +77,9 @@ import CardComentario from "@/components/CardComentario"
             },
             verUsuario(idCatUsuarios){
                 this.$emit("verUsuario", idCatUsuarios)
+            },
+            eliminarComentario(idComentarios){
+                this.$emit("eliminarComentario", idComentarios)
             }
         },
         

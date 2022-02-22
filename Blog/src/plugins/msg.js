@@ -47,8 +47,8 @@ msg.question = (mensaje, icon = 'question') => {
         showCancelButton: true,
         confirmButtonText: 'Sí',
         cancelButtonText: 'No',
-        confirmButtonClass: 'btn btn-success w-25 btn-sm',
-        cancelButtonClass: 'btn btn-secondary w-25 btn-sm'
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-secondary'
     })
 }
 
