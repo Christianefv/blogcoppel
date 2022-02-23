@@ -12,7 +12,7 @@ using WarmPack.Web.Nancy;
 
 namespace Blog.Api.Modules
 {
-    public class PublicacionesModule : NancySecureModule
+    public class PublicacionesModule : NancyModule
     {
         private readonly DAPublicaciones _DA = null;
         public PublicacionesModule() : base("/usuarios/publicaciones")
