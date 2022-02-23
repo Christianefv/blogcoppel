@@ -13,7 +13,7 @@ servicioInicio.consultarCategorias = function(idCategoria) {
 }
 
 servicioInicio.consultarPublicaciones = function(idCatUsuarios, idCatCategorias, idCatPublicaciones) {
-    return base.get('/usuarios/publicaciones/v1/' + idCatUsuarios + '/'+ idCatCategorias + '/' + idCatPublicaciones)
+    return base.get('/publico/publicaciones/v1/' + idCatUsuarios + '/'+ idCatCategorias + '/' + idCatPublicaciones)
     .then(r => {
         return r.data;
     })

@@ -46,29 +46,6 @@ namespace Blog.Api.DA.Authentication
             parametros.Add("@pResultado", ConexionDbType.Bit, ParameterDirection.Output);
             parametros.Add("@pMsg", ConexionDbType.VarChar, ParameterDirection.Output);
 
-            ApiClient client = new ApiClient(Globales.UrlApiBlog);
-
-            var user = ConfigurationManager.AppSettings["ApiBlogUsuario"];
-            var pass = ConfigurationManager.AppSettings["ApiBlogPassword"];
-
-
-            //var resultado = await client.Post<Result<ResultLogin>>("/seguridad/login", new
-            //{
-            //    usuario = user,
-            //    password = pass
-            //});
-
-            //var token = resultado.Data.Data.Token;
-
-            //client.SetRequestHeaders(h =>
-            //{
-            //    h.Add("Authorization", "Bearer " + token.AccessToken);
-            //});
-
-
-            //var r = await client.Post<Result<int>>("/logistica/embarque/guardar-tarima", new { codRuta, usuario, codSucursal });
-            //return r;
-
             _conexion.RecordsetsExecute("procWebTokensBuscar", parametros);
             var count = _conexion.RecordsetsResults<TokenItemModel>();
             var token = count?.FirstOrDefault();
@@ -76,7 +53,7 @@ namespace Blog.Api.DA.Authentication
             if (token != null)
             {
                 _conexion.RecordsetsResults(r => {
-                    token.User = new WarmPack.Web.Nancy.Models.Security.UserModel(r["IdCatUsuario"].ToString(), r["IdCatUsuario"].ToString(), r["Usuario"].ToString());
+                    token.User = new WarmPack.Web.Nancy.Models.Security.UserModel(r["IdCatUsuario"].ToString(), r["Usuario"].ToString(), r["Nombre"].ToString());
                 });
 
                 result.Data = new List<TokenItemModel>() { token };

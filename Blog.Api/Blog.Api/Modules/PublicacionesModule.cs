@@ -2,15 +2,17 @@
 using Blog.Api.Models;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Security;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using WarmPack.Web.Nancy;
 
 namespace Blog.Api.Modules
 {
-    public class PublicacionesModule : NancyModule
+    public class PublicacionesModule : NancySecureModule
     {
         private readonly DAPublicaciones _DA = null;
         public PublicacionesModule() : base("/usuarios/publicaciones")
@@ -32,7 +34,7 @@ namespace Blog.Api.Modules
                 int idComentarios = arg.idComentarios;
                 var r = _DA.EliminarComentario(idComentarios);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -48,7 +50,7 @@ namespace Blog.Api.Modules
                 var comentario = this.Bind<ComentarioModel>();
                 var r = _DA.GuardarComentario(comentario);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -64,7 +66,7 @@ namespace Blog.Api.Modules
                 int IdCatPublicaciones = arg.idCatPublicaciones;
                 var r = _DA.ConsultarComentarios(IdCatPublicaciones);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -81,7 +83,7 @@ namespace Blog.Api.Modules
                 int IdCatPublicaciones = arg.idCatPublicaciones;
                 var r = _DA.DeletePublicaciones(IdCatPublicaciones);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -94,28 +96,14 @@ namespace Blog.Api.Modules
             try
             {
                 PublicacionModel publicacion = new PublicacionModel();
-                byte[] imagen = null;
                 publicacion.Titulo = this.Request.Form.titulo;
                 publicacion.Descripcion = this.Request.Form.descripcion;
                 publicacion.IdCatCategorias = this.Request.Form.idCatCategorias;
-                publicacion.IdCatUsuarios = this.Request.Form.idCatUsuarios;
-                foreach (var file in this.Request.Files)
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        file.Value.CopyTo(ms);
-                        imagen = ms.ToArray();
-                    }
-                }
-                if (imagen != null)
-                {
-                    publicacion.Imagen = imagen == null ? "" : Convert.ToBase64String(imagen, 0, imagen.Length);
-                }
-
+                publicacion.IdCatPublicaciones = this.Request.Form.idCatPublicaciones;
 
                 var r = _DA.UpdatePublicaciones(publicacion);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -133,7 +121,7 @@ namespace Blog.Api.Modules
                 publicacion.IdCatUsuarios = arg.idCatUsuarios;
                 var r = _DA.GetPublicaciones(publicacion);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -167,7 +155,7 @@ namespace Blog.Api.Modules
 
                 var r = _DA.PostPublicaciones(publicacion);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {

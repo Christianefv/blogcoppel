@@ -64,11 +64,10 @@ namespace Blog.Api.DA
             try
             {
                 ConexionParameters parametros = new ConexionParameters();
-                parametros.Add("@pIdCAtPublicaciones", ConexionDbType.Int, publicacion.IdCatPublicaciones);
+                parametros.Add("@pIdCatPublicaciones", ConexionDbType.Int, publicacion.IdCatPublicaciones);
                 parametros.Add("@pIdCatCategorias", ConexionDbType.Int, publicacion.IdCatCategorias);
                 parametros.Add("@pTitulo", ConexionDbType.VarChar, publicacion.Titulo);
                 parametros.Add("@pDescripcion", ConexionDbType.VarChar, publicacion.Descripcion);
-                parametros.Add("@pImagen", ConexionDbType.VarChar, publicacion.Imagen);
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
                 parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
 

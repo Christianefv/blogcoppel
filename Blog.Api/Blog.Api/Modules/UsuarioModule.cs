@@ -80,15 +80,13 @@ namespace Blog.Api.Modules
                         imagen = ms.ToArray();
                     }
                 }
-                if (imagen != null)
-                {
-                    usuario.Avatar = imagen == null ? "" : Convert.ToBase64String(imagen, 0, imagen.Length);
-                }
+                
+                usuario.Avatar = imagen == null ? "" : Convert.ToBase64String(imagen, 0, imagen.Length);
 
 
                 var r = _DA.AltaUsuario(usuario);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {

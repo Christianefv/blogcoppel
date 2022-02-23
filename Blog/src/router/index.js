@@ -11,6 +11,7 @@ import Publicar from '@/views/privada/Publicar'
 import MisPublicaciones from '@/views/privada/MisPublicaciones'
 import PublicacionesCategorias from '@/views/privada/PublicacionesCategorias'
 import Categorias from '@/views/privada/Categorias'
+import MisCategorias from '@/views/privada/MisCategorias'
 Vue.use(VueRouter)
 
 const routes = [  
@@ -40,6 +41,7 @@ const routes = [
   children: [
     { name: 'Publicar', path: '/publicar/', component: Publicar},
     { name: 'Categorias', path: '/agregar-categoria', component: Categorias },
+    { name: 'MisCategorias', path: '/mis-categorias', component: MisCategorias },
     { name: 'MisPublicaciones', path: '', component: MisPublicaciones},
     { name: 'PublicacionesCategorias', path: '/publicaciones-usuarios', component: PublicacionesCategorias}
   ]

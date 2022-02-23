@@ -16,18 +16,19 @@ namespace Blog.Api.Modules
         public CategoriaModule() : base("/categorias")
         {
             _DA = new DACategoria();
-            Get("/v1/{idCatCategorias}", p => GetCategorias(p));
-            Post("/v1/", p => PostCategorias(p));
+            Get("/v1/{idCatCategorias}", p => ObtenerCategorias(p));
+            Delete("/v1/{idCatCategorias}", p => EliminarCategoria(p));
+            Post("/v1/", p => GuardarCategoria(p));
         }
 
-        private dynamic GetCategorias(dynamic arg)
+        private dynamic EliminarCategoria(dynamic arg)
         {
             try
             {
                 int idCatCategorias = arg.idCatCategorias;
-                var r = _DA.GetCategoria(idCatCategorias);
+                var r = _DA.EliminarCategoria(idCatCategorias);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -35,7 +36,22 @@ namespace Blog.Api.Modules
             }
         }
 
-        private dynamic PostCategorias(dynamic arg)
+        private dynamic ObtenerCategorias(dynamic arg)
+        {
+            try
+            {
+                int idCatCategorias = arg.idCatCategorias;
+                var r = _DA.ObtenerCategorias(idCatCategorias);
+
+                return Response.AsJson(r, HttpStatusCode.Accepted);
+            }
+            catch (Exception ex)
+            {
+                return Response.AsJson(ex, HttpStatusCode.InternalServerError);
+            }
+        }
+
+        private dynamic GuardarCategoria(dynamic arg)
         {
             try
             {
@@ -55,9 +71,9 @@ namespace Blog.Api.Modules
                 categoria.Imagen = imagen == null ? "" : Convert.ToBase64String(imagen, 0, imagen.Length);
                 
 
-                var r = _DA.PostCategoria(categoria);
+                var r = _DA.GuardarCategoria(categoria);
 
-                return Response.AsJson(r);
+                return Response.AsJson(r, HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {

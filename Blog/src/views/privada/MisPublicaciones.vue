@@ -10,6 +10,7 @@
                         <th>Categoría</th>
                         <th>Titulo</th>
                         <th>Descripción</th>
+                        <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
@@ -28,8 +29,16 @@
                         <td class="text-center" 
                             style="width:30px!important">
                             <button style="border:none" 
+                                    class="text-white btn bg-primary" 
+                                    @click="editar(item)">
+                                    <i class="fas fa-edit"></i>
+                            </button>
+                        </td>
+                        <td class="text-center" 
+                            style="width:30px!important">
+                            <button style="border:none" 
                                     class="text-white bg-danger btn" 
-                                    @click="eliminarPublicacion(item, index)">
+                                    @click="eliminarPublicacion(item)">
                                     <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -40,16 +49,34 @@
         <div v-else class="bg-amarillo col text-center text-white ml-2 mr-2" style="height:30px !important;">
             <span> No hay publicaciones que mostrar</span>
         </div>
+
+        <!-- modal vista previa -->
+        <b-modal id="modal-editar" size="xl" title="Editar" hide-footer>
+        <div class="d-flex" >
+            <pm-datos-publicacion   :categorias="categorias"
+                                    :publicacion="publicacion"
+                                    @guardarPublicacion="guardarPublicacion">
+            </pm-datos-publicacion>
+        </div>
+        
+    </b-modal> 
     </div>
 </template>
 <script>
+import PmDatosPublicacion from "@/components/privada/EditarPublicacion"
 import servicio from "@/services/servicio-publicacion"
+import servicioCategorias from "@/services/servicio-categorias"
 export default {
     data() {
         return {
-           publicaciones:[]
+           categorias:[],
+           publicaciones:[],
+           publicacion:{}
         }
     },
+    components: {
+        PmDatosPublicacion
+	},
     computed:{
 
     },
@@ -90,8 +117,10 @@ export default {
 				})
             }
         },
-        editar(item){
-            console.log(item)
+        async editar(item){
+            await this.consultarCategorias()
+            this.publicacion = item
+            this.$bvModal.show('modal-editar')
         },
         cortarTexto(cadena, fin) {
             if (cadena != undefined) {
@@ -102,6 +131,39 @@ export default {
                 }
             }
         },
+        async consultarCategorias(){
+            this.$loading(true)
+			await servicioCategorias.consultarCategorias(0)
+				.then(r => {
+                    this.$loading(false)
+					if(r.value){
+						this.categorias = r.data
+					}
+				})
+				.catch(e => {
+					console.log(e)
+					this.$loading(false)
+				})
+		},
+        async guardarPublicacion(formData){
+            this.$bvModal.hide('modal-editar')
+            let r = await this.$msg.question('Se guardaran los cambios, ¿Desea continuar?') 
+            if(r.value){
+                this.$loading(true)
+                servicio.modificarPublicaciones(formData)
+				.then(r => {
+					this.$loading(false)
+					if(r.value){
+						this.consultarPublicaciones()
+					}
+				})
+				.catch(e => {
+					console.log(e)
+					this.$loading(false)
+				})
+                console.log('tag', formData)
+            }
+        }
     }
 }
 </script>

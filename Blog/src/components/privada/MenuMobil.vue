@@ -5,7 +5,7 @@
 			<ul class="list-group list-group-horizontal px-2 w-100 d-flex align-items-center">
 				<li @click="desplazar($event,'publicaciones-usuario',0)" 
 					class="list-group-item" 
-					title="Mis publicaciones">
+					title="Inicio">
 					<router-link to="/usuarios/">
 						<i 	:class="{ active: current == 'publicaciones-usuario'}" 
 							class="fas fa-home"></i>
@@ -20,16 +20,6 @@
 							class="fas fa-upload"></i>
 					</router-link>
 				</li>
-				<li v-if="usuarioGlobal().administrador" 
-					@click="desplazar($event,'agregar-categoria',2)" 
-					class="list-group-item" 
-					id="agregar-categoria" 
-					title="Agregar categoría">
-					<router-link to="/agregar-categoria">
-						<i 	:class="{ active: current == 'agregar-categoria'}" 
-							class="fas fa-plus"></i>
-					</router-link>
-				</li>
 				<li @click="desplazar($event,'publicaciones-usuarios',3)" 
 					class="list-group-item" 
 					id="publicaciones-usuarios" 
@@ -39,6 +29,26 @@
 							class="fas fa-comment"></i>
 					</router-link>
 				</li>
+				<li v-if="usuarioGlobal().administrador" 
+					@click="desplazar($event,'agregar-categoria',2)" 
+					class="list-group-item" 
+					id="agregar-categoria" 
+					title="Agregar categoría">
+					<router-link to="/agregar-categoria">
+						<i 	:class="{ active: current == 'agregar-categoria'}" 
+							class="fas fa-plus"></i>
+					</router-link>
+				</li>	
+				<li v-if="usuarioGlobal().administrador" 
+					@click="desplazar($event,'mis-categorias',4)" 
+					class="list-group-item" 
+					id="mis-categorias" 
+					title="Mis categorías">
+					<router-link to="/mis-categorias">
+						<i 	:class="{ active: current == 'mis-categorias'}" 
+							class="fas fa-list"></i>
+					</router-link>
+				</li>			
 				<li @click="logOut" 
 					class="list-group-item" 
 					id="cerrar-sesion" 
@@ -71,7 +81,10 @@
 				this.current = 'agregar-categoria'
 			} else if (this.$route.path.includes("usuarios")) {
 				this.current = 'usuarios'
-			} 
+			} else if (this.$route.path.includes("misCategorias")) {
+				this.current = 'usuarios'
+			}
+
 		},
 		directives: {
 			
@@ -164,7 +177,7 @@
 	}
 
 	.nav-movil ul li i.active {
-		color: #17a2b8 !important;
+		color: #17395C !important;
 		background-color:white !important;
         border-radius: 50%;
 		transition: all 0.5s;

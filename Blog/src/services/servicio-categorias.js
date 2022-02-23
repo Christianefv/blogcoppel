@@ -16,4 +16,24 @@ servicio.guardarCategorias = function(formData) {
         return e;
     })
 }
+
+servicio.consultarCategorias = function(idCategoria) {
+    return base.get('/publico/categorias/v1/' + idCategoria)
+        .then(r => {
+            return r.data;
+        })
+        .catch(e => {
+            return e;
+        })
+}
+
+servicio.eliminarCategorias = function(idCatCategorias) {
+    return base.delete('/categorias/v1/' + idCatCategorias)
+    .then(r => {
+        return r.data;
+    })
+    .catch(e => {
+        return e;
+    })
+}
 export default servicio;

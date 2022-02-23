@@ -48,18 +48,5 @@ namespace Blog.Api.DA.Authentication
 
             return r;
         }
-
-        public Result<List<CredencialesModel>> CredencialesDifarmer()
-        {
-            var result = new Result<List<CredencialesModel>>();
-
-            var parametros = new ConexionParameters();
-            parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
-            parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
-
-            result = _conexion.ExecuteWithResults<CredencialesModel>("procObtenerCredencialesDifarmer", parametros);
-
-            return result;
-        }
     }
 }

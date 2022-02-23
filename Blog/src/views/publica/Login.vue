@@ -73,8 +73,9 @@ export default {
         async login(){
             var r = await servicio.login(this.credenciales)
             if (r.value) {
-                console.log('token', r)
-                this.tokenWebUsuarios.token = r.token.token
+                console.log('servicio.login(this.credenciales)',)
+                this.tokenWebUsuarios.accessToken = r.token.accessToken
+                this.tokenWebUsuarios.token = r.token
                 this.tokenWebUsuarios.expiresAt = r.token.expiresAt
                 this.tokenWebUsuarios.refreshToken = r.token.refreshToken
                 this.tokenWebUsuarios.user = JSON.stringify(r.data)
@@ -84,6 +85,7 @@ export default {
                 window.localStorage.user = r.data.usuario
                 window.localStorage.expiresAt = r.token.expiresAt
                 window.localStorage.refreshToken = r.token.refreshToken
+                window.localStorage.accessToken = r.token.accessToken
                 
                 this.$router.push({ path: "/usuarios" })
                     .catch(err => err)

@@ -11,19 +11,13 @@
 </template>
 <script>
 import PmDatosPublicacion from "@/components/privada/DatosPublicacion"
-import servicioInicio from "@/services/servicio-publico"
+import servicioCategorias from "@/services/servicio-categorias"
 import servicio from "@/services/servicio-publicacion"
 export default {
     data() {
         return {
             categorias:[],
             idCatPublicaciones:0
-            // idCategoriaSeleccionada:0,
-            // publicacion:{
-            //     titulo:'',
-            //     descripcion:''
-            // },
-            // file:[],
         }
     },
     components: {
@@ -34,9 +28,10 @@ export default {
     },
     methods: {
         consultarCategorias(){
-			servicioInicio.consultarCategorias(0)
+            this.$loading(true)
+			servicioCategorias.consultarCategorias(0)
 				.then(r => {
-					console.log(r)
+                    this.$loading(false)
 					if(r.value){
 						this.categorias = r.data
 					}
@@ -54,17 +49,22 @@ export default {
         },
         async guardarPublicacion(formData){
             try {
-                
-                let r = await servicio.guardarPublicacion(formData)
+                let r = await this.$msg.question('Se dará de alta la publicación, ¿desea continuar?')
                 if(r.value){
-                    this.$msg.success(r.message);
-                    this.$router.push({ path: "/usuarios" })
-                    .catch(err => err)
-                }
-                else{
-                    this.$msg.info(r.message);
+                    this.$loading(true)
+                    let r = await servicio.guardarPublicacion(formData)
+                    this.$loading(false)
+                    if(r.value){
+                        this.$msg.success(r.message);
+                        this.$router.push({ path: "/usuarios" })
+                        .catch(err => err)
+                    }
+                    else{
+                        this.$msg.info(r.message);
+                    }
                 }
             } catch (error) {
+                this.$loading(false)
                 console.log('guardarPublicacion', error)
             }
             
