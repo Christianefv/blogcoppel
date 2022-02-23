@@ -55,10 +55,10 @@
         <div class="d-flex" >
             <pm-datos-publicacion   :categorias="categorias"
                                     :publicacion="publicacion"
-                                    @guardarPublicacion="guardarPublicacion">
-            </pm-datos-publicacion>
+                                    @guardarPublicacion="guardarPublicacion"
+                                    @cerrarModalEditar="cerrarModalEditar">
+            </pm-datos-publicacion>            
         </div>
-        
     </b-modal> 
     </div>
 </template>
@@ -71,7 +71,13 @@ export default {
         return {
            categorias:[],
            publicaciones:[],
-           publicacion:{}
+           publicacion:{},
+           publicacionRespaldo:{
+               titulo:''
+               ,descripcion:''
+               ,idCatCategorias:0
+               ,idCatPublicaciones:0
+               ,idCatUsuarios:0}
         }
     },
     components: {
@@ -120,6 +126,11 @@ export default {
         async editar(item){
             await this.consultarCategorias()
             this.publicacion = item
+            this.publicacionRespaldo.titulo = item.titulo
+            this.publicacionRespaldo.descripcion = item.descripcion
+            this.publicacionRespaldo.idCatCategorias = item.idCatCategorias
+            this.publicacionRespaldo.idCatPublicaciones = item.idCatPublicaciones
+            this.publicacionRespaldo.idCatUsuarios = item.idCatUsuarios
             this.$bvModal.show('modal-editar')
         },
         cortarTexto(cadena, fin) {
@@ -163,6 +174,21 @@ export default {
 				})
                 console.log('tag', formData)
             }
+            else{
+                this.publicacion.titulo = this.publicacionRespaldo.titulo
+                this.publicacion.descripcion = this.publicacionRespaldo.descripcion
+                this.publicacion.idCatCategorias = this.publicacionRespaldo.idCatCategorias
+                this.publicacion.idCatPublicaciones = this.publicacionRespaldo.idCatPublicaciones
+                this.publicacion.idCatUsuarios = this.publicacionRespaldo.idCatUsuarios
+            }
+        },
+        cerrarModalEditar(){
+            this.$bvModal.hide('modal-editar')
+            this.publicacion.titulo = this.publicacionRespaldo.titulo
+            this.publicacion.descripcion = this.publicacionRespaldo.descripcion
+            this.publicacion.idCatCategorias = this.publicacionRespaldo.idCatCategorias
+            this.publicacion.idCatPublicaciones = this.publicacionRespaldo.idCatPublicaciones
+            this.publicacion.idCatUsuarios = this.publicacionRespaldo.idCatUsuarios
         }
     }
 }

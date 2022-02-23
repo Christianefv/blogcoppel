@@ -61,7 +61,7 @@
 							<span class="nav-link-text d-none d-sm-inline">Agregar categoria</span>
 						</router-link>
 					</li>
-					<li class="nav-item text-left">
+					<li class="nav-item text-left" v-if="usuarioGlobal().administrador">
 						<router-link
 							:class="{ active: current == 4 }"
 							@click.native="togleMenu(4)"

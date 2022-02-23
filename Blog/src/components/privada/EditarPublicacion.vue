@@ -44,7 +44,7 @@
                 <div class="form-group row">
                     <div class="col-11 d-flex justify-content-end">                        
                         <button class="btn btn-secondary m-2" 
-                        @click="$bvModal.hide('modal-editar')">Cancelar</button>
+                        @click="cerrarModalEditar">Cancelar</button>
                         <button class=" btn btn-primary m-2"
                             @click="guardarPublicacion">Guardar</button>
                     </div>
@@ -97,6 +97,9 @@ export default {
         },
         vistaPrevia(){
             this.$bvModal.show('modal-vista-previa')
+        },
+        cerrarModalEditar(){
+            this.$emit("cerrarModalEditar")
         }
         
     }
