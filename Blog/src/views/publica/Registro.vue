@@ -4,7 +4,7 @@
 
         <div class="col-12 offset-0 offset-lg-3 col-lg-6 mt-4">
             <div class="row justify-content-center">
-                <span class="h3">Registrarte</span>
+                <span class="h3">Crear cuenta</span>
             </div>
             <div class="row p-0 mt-4">            
                 <div class="form-group col-12 col-lg-6">
@@ -65,7 +65,7 @@
                     />
                 </div>
                 <div class="form-group row col-12">
-                    <label class="col-3 col-form-label text-sm-right pr-0">Foto de perfíl:</label>
+                    <label class="col-3 col-form-label text-sm-right pr-0">Foto de perfil:</label>
                     <div class="col-12 col-lg-1">
                         <div class="input-group-append">
                             <div class="input-group-text form-control-sm inputFilesAppendPrepend">

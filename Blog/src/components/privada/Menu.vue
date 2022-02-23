@@ -10,13 +10,13 @@
 					</li>
 					<li class="nav-item text-left">
 						<router-link
-							:class="{ active: current == 0 }"
-							@click.native="togleMenu(0)"
+							:class="{ active: current == 1 }"
+							@click.native="togleMenu(1)"
 							class="nav-link text-truncate"
 							to="/usuarios"
 						>
 							<i
-								:class="[current == 0 ? 'text-white' : '','blue-bar-icon']"
+								:class="[current == 1 ? 'text-white' : '','blue-bar-icon']"
 								class="fas fa-home"
 							></i>
 							<span class="nav-link-text d-none d-sm-inline">Inicio</span>
@@ -24,12 +24,12 @@
 					</li>
 					<li class="nav-item text-left">
 						<router-link
-							:class="{ active: current == 1 }"
-							@click.native="togleMenu(1)"
+							:class="{ active: current == 2 }"
+							@click.native="togleMenu(2)"
 							class="nav-link text-truncate"
 							to="/publicar"
 						>
-							<i	:class="[current == 1 ? 'text-white' : '','blue-bar-icon']"
+							<i	:class="[current == 2 ? 'text-white' : '','blue-bar-icon']"
 								class="fas fa-upload"
 							></i>
 							<span class="nav-link-text d-none d-sm-inline">Publicar</span>
@@ -37,12 +37,12 @@
 					</li>
 					<li class="nav-item text-left" >
 						<router-link
-							:class="{ active: current == 3 }"
-							@click.native="togleMenu(3)"
+							:class="{ active: current == 4 }"
+							@click.native="togleMenu(4)"
 							class="nav-link text-truncate"
 							to="/publicaciones-usuarios"
 						>
-							<i :class="[ current == 3 ? 'text-white' : '', 'blue-bar-icon']"
+							<i :class="[ current == 4 ? 'text-white' : '', 'blue-bar-icon']"
 								class="fas fa-comment"
 							></i>
 							<span class="nav-link-text d-none d-sm-inline">Todas las publicaciones</span>
@@ -50,12 +50,12 @@
 					</li>
 					<li class="nav-item text-left" v-if="usuarioGlobal().administrador">
 						<router-link
-							:class="{ active: current == 2 }"
-							@click.native="togleMenu(2)"
+							:class="{ active: current == 3 }"
+							@click.native="togleMenu(3)"
 							class="nav-link text-truncate"
 							to="/agregar-categoria"
 						>
-							<i :class="[ current == 2 ? 'text-white' : '', 'blue-bar-icon']"
+							<i :class="[ current == 3 ? 'text-white' : '', 'blue-bar-icon']"
 								class="fas fa-plus"
 							></i>
 							<span class="nav-link-text d-none d-sm-inline">Agregar categoria</span>
@@ -63,12 +63,12 @@
 					</li>
 					<li class="nav-item text-left" v-if="usuarioGlobal().administrador">
 						<router-link
-							:class="{ active: current == 4 }"
-							@click.native="togleMenu(4)"
+							:class="{ active: current == 5 }"
+							@click.native="togleMenu(5)"
 							class="nav-link text-truncate"
 							to="/mis-categorias"
 						>
-							<i :class="[ current == 4 ? 'text-white' : '', 'blue-bar-icon']"
+							<i :class="[ current == 5 ? 'text-white' : '', 'blue-bar-icon']"
 								class="fas fa-list"
 							></i>
 							<span class="nav-link-text d-none d-sm-inline">Mis categorías</span>
@@ -115,7 +115,7 @@
 <script>
 	export default {
 		name: "SideBar",
-		props: [],
+		props: ["opcion"],
 		data() {
 			return {
 				current: 0,			
@@ -123,19 +123,20 @@
 		},
 		mounted() {
 			if (this.$route.path.includes("publicaciones-usuarios")) {
-				this.current = 3
-			} else if (this.$route.path.includes("publicar")) {
-				this.current = 1
-			} else if (this.$route.path.includes("agregar-categoria")) {
-				this.current = 2
-			} else if (this.$route.path.includes("usuarios")) {
-				this.current = 0
-			} else if (this.$route.path.includes("mis-categorias")) {
 				this.current = 4
+			} else if (this.$route.path.includes("publicar")) {
+				this.current = 2
+			} else if (this.$route.path.includes("agregar-categoria")) {
+				this.current = 3
+			} else if (this.$route.path.includes("usuarios")) {
+				this.current = 1
+			} else if (this.$route.path.includes("mis-categorias")) {
+				this.current = 5
 			} 
 		},
 		methods: {
 			togleMenu: function(opcion) {
+				console.log('togleMenu: function(opcion)', opcion)
 				this.current = opcion
 				if(opcion == 3){
 					this.$router.go()	
@@ -152,6 +153,13 @@
 			}
 		},
 		watch: {
+			opcion(newValue){
+				console.log('newvalue', newValue)
+				if(newValue > 0){
+					this.togleMenu(newValue)
+				}
+				
+			}
 		}
 	}
 </script>

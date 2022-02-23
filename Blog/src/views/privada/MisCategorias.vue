@@ -85,6 +85,7 @@ export default {
 				.then(r => {
 					this.$loading(false)
 					if(r.value){
+                        this.$msg.success(r.message)
 						this.consultarCategorias()
 					}
                     else{

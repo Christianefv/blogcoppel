@@ -56,6 +56,7 @@ export default {
                     this.$loading(false)
                     if(r.value){
                         this.$msg.success(r.message);
+                        this.$emit('togleMenu', 1)
                         this.$router.push({ path: "/usuarios" })
                         .catch(err => err)
                     }

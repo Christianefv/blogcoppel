@@ -3,9 +3,10 @@
         <!-- <pm-header></pm-header> -->
         <pm-menu-movil
 		></pm-menu-movil>
-        <sidebar-menu>
+        <sidebar-menu   :opcion="opcion">
             <template slot="contenido">
                 <router-view
+                    @togleMenu="togleMenu"
                     :data="menu"
                 ></router-view>
             </template>
@@ -50,13 +51,22 @@ export default {
                     title: 'Charts',
                     icon: 'fa fa-chart-area'
                 },                
-            ]
+            ],
+            opcion:0
         }
     },
     components: {
         SidebarMenu,
         PmMenuMovil,
         // PmHeader
+    },
+    methods: {
+			togleMenu(opcion){
+                this.opcion = opcion
+				this.$nextTick(()=>{
+					this.opcion = 0
+				})
+			},
     }
 }
 </script>

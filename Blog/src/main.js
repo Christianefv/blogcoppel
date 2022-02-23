@@ -8,9 +8,11 @@ import store from './store'
 import Vuelidate from "vuelidate"
 import VueFacebook from 'vue-facebook'
 import globalesMixin from "@/mixins/globales"
+import sideBarMixin from "@/mixins/sidebarmx"
 
 Vue.config.productionTip = false
 Vue.mixin(globalesMixin)
+Vue.mixin(sideBarMixin);
 Vue.use(Msg)
 Vue.use(Vuelidate)
 Vue.use(VueFacebook)

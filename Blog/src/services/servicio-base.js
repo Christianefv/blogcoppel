@@ -17,7 +17,7 @@ servicio.interceptors.request.use(
 		{
 			lstoken = JSON.parse(window.localStorage.tokenWebUsuarios)
 			token = lstoken.token
-            console.log('token', token)
+            //console.log('token', token)
 		}
         
         if (token)
@@ -36,7 +36,15 @@ servicio.interceptors.request.use(
 
 servicio.interceptors.response.use(
 	response => {
-		return response;
+		if(response.status == 202){
+			return response;
+		}
+		else{
+			Swal.fire({
+				text: response.statusText,
+				icon: 'warning'
+			})
+		}
 	},
 	error => {
 		const { config, response} = error

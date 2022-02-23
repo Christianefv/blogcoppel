@@ -1,8 +1,8 @@
 <template>
   <div >
     <div id="nav" class="d-flex justify-content-end bg-dark">
-      <a class="m-2" @click="inicio">inicio</a>
-      <a class="m-2" @click="ultimasPublicaciones">Ultimas publicaciónes</a>
+      <a class="m-2" @click="inicio">Inicio</a>
+      <a class="m-2" @click="ultimasPublicaciones">Últimas publicaciones</a>
       <a class="m-2" @click="login">Inicia sesión o regístrate</a>
       <!-- <router-link to="/" class="m-2">Inicio </router-link>
       <router-link to="/Posts/0/0/0/false" class="m-2">Ultimas publicaciónes </router-link>

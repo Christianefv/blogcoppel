@@ -38,7 +38,7 @@
                             <strong></strong>
                         </span>
                         <div class="mt-2">
-                            <router-link to="/registro" class="btn btn-lg btn-block btn-outline-light">Registrate </router-link>
+                            <router-link to="/registro" class="btn btn-lg btn-block btn-outline-light">Crear cuenta</router-link>
                             <router-view/>
                         </div>
                     </form>

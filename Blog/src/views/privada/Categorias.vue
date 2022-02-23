@@ -106,6 +106,7 @@ export default({
                     .then(r => {
                         if(r.value){
                             this.$msg.success(r.message)
+                            this.$emit('togleMenu', 5)
                             this.$router.push({ path: "/mis-categorias" })
                             .catch(err => err)
                         }
