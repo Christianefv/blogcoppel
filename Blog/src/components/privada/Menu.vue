@@ -5,11 +5,7 @@
 				<ul class="nav flex-column flex-nowrap overflow-hidden blue-bar-over">
 					<li class="nav-item text-left my-3" style="">
 						<router-link class="text-truncate text-decoration-none" @click.native="togleMenu(0)" to="/usuarios/">
-						<!-- <div v-if="usuarioGlobal().avatar != ''" class="avatar">
-							<img class="img-fluid" :src="'data:image/jpeg;base64,' + usuarioGlobal().avatar" alt="image responsive">
-						</div> -->
 						<span class="d-none d-sm-inline welcome-text">{{usuarioGlobal().usuario}}</span>
-							<!-- <span class="d-none d-sm-inline welcome-text">Bienvenido</span> -->
 						</router-link>
 					</li>
 					<li class="nav-item text-left">
@@ -39,6 +35,19 @@
 							<span class="nav-link-text d-none d-sm-inline">Publicar</span>
 						</router-link>
 					</li>
+					<li class="nav-item text-left" >
+						<router-link
+							:class="{ active: current == 3 }"
+							@click.native="togleMenu(3)"
+							class="nav-link text-truncate"
+							to="/publicaciones-usuarios"
+						>
+							<i :class="[ current == 3 ? 'text-white' : '', 'blue-bar-icon']"
+								class="fas fa-comment"
+							></i>
+							<span class="nav-link-text d-none d-sm-inline">Todas las publicaciones</span>
+						</router-link>
+					</li>
 					<li class="nav-item text-left" v-if="usuarioGlobal().administrador">
 						<router-link
 							:class="{ active: current == 2 }"
@@ -54,15 +63,15 @@
 					</li>
 					<li class="nav-item text-left">
 						<router-link
-							:class="{ active: current == 3 }"
-							@click.native="togleMenu(3)"
+							:class="{ active: current == 4 }"
+							@click.native="togleMenu(4)"
 							class="nav-link text-truncate"
-							to="/publicaciones-usuarios"
+							to="/mis-categorias"
 						>
-							<i :class="[ current == 3 ? 'text-white' : '', 'blue-bar-icon']"
-								class="fas fa-comment"
+							<i :class="[ current == 4 ? 'text-white' : '', 'blue-bar-icon']"
+								class="fas fa-list"
 							></i>
-							<span class="nav-link-text d-none d-sm-inline">Todas las publicaciones</span>
+							<span class="nav-link-text d-none d-sm-inline">Mis categorías</span>
 						</router-link>
 					</li>
 					<!-- <li class="nav-item text-left">
@@ -121,6 +130,8 @@
 				this.current = 2
 			} else if (this.$route.path.includes("usuarios")) {
 				this.current = 0
+			} else if (this.$route.path.includes("mis-categorias")) {
+				this.current = 4
 			} 
 		},
 		methods: {

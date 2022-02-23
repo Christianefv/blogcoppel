@@ -1,6 +1,9 @@
 <template>
-    <div class="row">
+    <div class="row">        
 		<pm-header class="col-12"></pm-header>
+        <div class="col-12 h4 text-center mt-4">
+            Últimas publicaciónes
+        </div>
         <div 	class="col-12 mt-4" 
 				:key="index" 
 				v-for="(publicacion, index) in publicaciones">

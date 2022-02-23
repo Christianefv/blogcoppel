@@ -28,7 +28,6 @@ namespace Blog.Api.Modules
             Post("/login", datos => PostLogin(datos));
             Post("/logout", _ => PostLogout());
             Post("/renovar-token", _ => PostRenovarToken());
-            Get("/credencialesdifarmer", _ => GetCredencialesDifarmer());
 
             JwtManager.RefreshTokenManager = new TokenManager();
         }
@@ -57,7 +56,7 @@ namespace Blog.Api.Modules
                     //return Response.AsJson(new Result(r.Value, r.Message, token));
                     return Response.AsJson(new { r.Value, r.Message, r.Data, token }, HttpStatusCode.Accepted);
                 }
-                return Response.AsJson(new Result(r.Value, r.Message), HttpStatusCode.OK);
+                return Response.AsJson(new Result(r.Value, r.Message), HttpStatusCode.Accepted);
             }
             catch (Exception ex)
             {
@@ -82,42 +81,32 @@ namespace Blog.Api.Modules
         private object PostRenovarToken()
         {
             var p = this.BindModel();
-            var usuario = this.BindUser();
+            var usuario = new UsuarioModel();
 
-            string refreshToken = p.refreshToken;
+            string refreshToken = p.refresh_token;
 
             var t = JwtManager.RefreshTokenManager.Find(refreshToken) as WarmPack.Web.Nancy.Models.Jwt.TokenItemModel;
 
             if (t != null)
             {
+                
                 var claims = new List<Claim>();
+                claims.Add(new Claim("codUsuario", t.User.Id));
+                claims.Add(new Claim("usuario", t.User.User.ToString()));
+                claims.Add(new Claim("nombre", t.User.Name));
 
-                claims.Add(new Claim("codCliente", t.User.Id));
-                //claims.Add(new Claim("subUsuario", usuario.Claim("subUsuario").ToString()));
-                //claims.Add(new Claim("sucursal", usuario.Claim("sucursal").ToString()));
-
-                var token = JwtManager.GetJwt(new WarmPack.Web.Nancy.Models.Security.UserModel(t.User.Id, t.User.Id, t.User.Name), claims);
+                var usr = new WarmPack.Web.Nancy.Models.Security.UserModel(t.User.Id, t.User.Id, t.User.Name);
+                var token = JwtManager.GetJwt(usr, claims);
 
                 return Response.AsJson(new Result(true, "", token));
+                //return Response.AsJson(new Result(r.Value, r.Message, token));
+                //return Response.AsJson(new { t, usuario, token }, HttpStatusCode.Accepted);
             }
             else
             {
                 return Response.AsJson(new Result(false, "Token inválido"), HttpStatusCode.Unauthorized);
             }
-        }
 
-        private object GetCredencialesDifarmer()
-        {
-            try
-            {
-                var result = _DAAuthentication.CredencialesDifarmer();
-
-                return Response.AsJson(result);
-            }
-            catch (Exception ex)
-            {
-                return Response.AsJson(new Result(ex));
-            }
         }
     }
 }

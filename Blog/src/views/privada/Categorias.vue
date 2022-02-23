@@ -21,10 +21,6 @@
                             class="form-control form-control-sm" 
                             style="height:300px"
                             placeholder="Descripción del contenido de la categoría"></textarea>
-                <!-- <input  type="text" 
-                        class="form-control form-control-sm" 
-                        v-model.trim="categoria.descripcion" id="txtCategoria" 
-                        ref="txtNombre" tabindex="2" placeholder="Ej. Todo lo relacionado a deportes"> -->
             </div>
         </div>
         <div class="form-group row">
@@ -99,16 +95,27 @@ export default({
         },
         async guardarCategoria(){
             try {
-                let formData = new FormData()
-                formData.append('titulo', this.categoria.titulo)
-                formData.append('descripcion', this.categoria.descripcion)
-                formData.append('file', this.file);
-                this.$loading(true)
-                let r = await servicio.guardarCategorias(formData)
-                if (r.value) {
-                    this.$msg.success(r.message);
+                let r = await this.$msg.question('Se dará de alta la categoría, ¿desea continuar?')
+                if(r.value){
+                    let formData = new FormData()
+                    formData.append('titulo', this.categoria.titulo)
+                    formData.append('descripcion', this.categoria.descripcion)
+                    formData.append('file', this.file);
+                    this.$loading(true)
+                    servicio.guardarCategorias(formData)
+                    .then(r => {
+                        if(r.value){
+                            this.$msg.success(r.message)
+                            this.$router.push({ path: "/mis-categorias" })
+                            .catch(err => err)
+                        }
+                        this.$loading(false)
+                    })
+                    .catch(e => {
+                        console.log(e)
+                        this.$loading(false)
+                    })
                 }
-                this.$loading(false)
                 
             } catch (error) {
                 this.$loading(false)

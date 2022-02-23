@@ -17,7 +17,7 @@ namespace Blog.Api.DA
             _conexion = new Conexion(ConexionType.MSSQLServer, Globales.ConexionPrincipal);
         }
 
-        public Result<List<CategoriaModel>> GetCategoria(int idCatCategorias)
+        public Result<List<CategoriaModel>> ObtenerCategorias(int idCatCategorias)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Blog.Api.DA
             }
         }
 
-        public Result<List<CategoriaModel>> PostCategoria(CategoriaModel categoria)
+        public Result GuardarCategoria(CategoriaModel categoria)
         {
             try
             {
@@ -46,12 +46,30 @@ namespace Blog.Api.DA
                 parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
                 parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
 
-                var r = _conexion.ExecuteWithResults<CategoriaModel>("ProcCatCategoriasGuarda", parametros);
+                var r = _conexion.Execute("ProcCatCategoriasGuarda", parametros);
                 return r;
             }
             catch (Exception ex)
             {
-                return new Result<List<CategoriaModel>>(ex);
+                return new Result(ex);
+            }
+        }
+
+        public Result EliminarCategoria(int idCatCategorias)
+        {
+            try
+            {
+                ConexionParameters parametros = new ConexionParameters();
+                parametros.Add("@pIdCatCategorias", ConexionDbType.Int, idCatCategorias);
+                parametros.Add("@pResultado", ConexionDbType.Bit, System.Data.ParameterDirection.Output);
+                parametros.Add("@pMsg", ConexionDbType.VarChar, System.Data.ParameterDirection.Output, 300);
+
+                var r = _conexion.Execute("ProcCatCategoriasBorrar", parametros);
+                return r;
+            }
+            catch (Exception ex)
+            {
+                return new Result(ex);
             }
         }
     }
