@@ -138,7 +138,7 @@
 			togleMenu: function(opcion) {
 				console.log('togleMenu: function(opcion)', opcion)
 				this.current = opcion
-				if(opcion == 3){
+				if(opcion == 4){
 					this.$router.go()	
 				}
 			},
