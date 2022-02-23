@@ -329,4 +329,15 @@ ASALocalRun/
 .mfractor/
 
 # Local History for Visual Studio
-.localhistory/
+.localhistory/.localhistory/
+Blog.Api/Blog.Api/obj/Debug/Blog.Api.csproj.CoreCompileInputs.cache
+Blog.Api/.vs/Blog.Api/v15/Server/sqlite3/storage.ide-shm
+Blog.Api/Blog.Api/obj/Debug/Blog.Api.csproj.CoreCompileInputs.cache
+Blog.Api/.vs/Blog.Api/v15/Server/sqlite3/storage.ide-shm
+Blog.Api/.vs/Blog.Api/v15/Server/sqlite3/storage.ide-wal
+Blog.Api/Blog.Api/obj/Debug/Blog.Api.csproj.CoreCompileInputs.cache
+Blog.Api/Blog.Api/obj/Debug/Blog.Api.csprojAssemblyReference.cache
+Blog.Api/.vs/Blog.Api/v15/Server/sqlite3/storage.ide-shm
+Blog.Api/.vs/Blog.Api/v15/Server/sqlite3/storage.ide-shm
+Blog.Api/.vs/Blog.Api/v15/Server/sqlite3/storage.ide-wal
+Blog.Api/Blog.Api/obj/Debug/Blog.Api.csproj.CoreCompileInputs.cache
