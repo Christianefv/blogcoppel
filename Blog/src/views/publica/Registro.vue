@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="m-3 btn btn-outline-secondary" @click="$bvModal.hide('modal-vista-previa')">Cancelar</button>
+                <button class="m-3 btn btn-outline-secondary" @click="$bvModal.hide('modal-codigo')">Cancelar</button>
                 <button class="m-3 btn btn-outline-warning" @click="validarCodigo">Enviar</button>
             </div>            
         </b-modal> 
